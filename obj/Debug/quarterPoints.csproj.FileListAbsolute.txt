@@ -1,0 +1,11 @@
+C:\Users\user\source\repos\quarterPoints\bin\Debug\quarterPoints.exe.config
+C:\Users\user\source\repos\quarterPoints\bin\Debug\quarterPoints.exe
+C:\Users\user\source\repos\quarterPoints\bin\Debug\quarterPoints.pdb
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.Form1.resources
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.Properties.Resources.resources
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.csproj.GenerateResource.cache
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.exe
+C:\Users\user\source\repos\quarterPoints\obj\Debug\quarterPoints.pdb
