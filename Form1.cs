@@ -17,14 +17,25 @@ namespace quarterPoints
             InitializeComponent();
         }
 
-        private void button_createPoints_Click(object sender, EventArgs e)
+        /*
+             2.3.1 
+             Случайным образом формируются координаты X и Y 100 точек. 
+             Диапазон значений координат от -150 до +150. 
+             Подсчитать и напечатать количество точек, расположенных на каждой четверти. 
+             Отобразить результат работы программы с помощью таблицы (фрагмент) и графически, например, с помощью круговых диаграмм.
+         */
+
+        Graphics graphics;
+        int width, height;
+
+        void createChart()
         {
-            Graphics graphics = pictureBox_chart.CreateGraphics();
-            Pen pen = new Pen(Color.Red, 2);
+            graphics = pictureBox_chart.CreateGraphics();
+            Pen pen = new Pen(Color.Black, 2);
 
             // Размеры области построения графика
-            int width = pictureBox_chart.Width;
-            int height = pictureBox_chart.Height;
+            width = pictureBox_chart.Width;
+            height = pictureBox_chart.Height;
 
             // Координатные оси
             graphics.DrawLine(pen, width / 2, 0, width / 2, height);
@@ -38,35 +49,64 @@ namespace quarterPoints
 
             // Подписи координатных осей
             graphics.DrawString("Y", new Font("10_IC_1", 12), Brushes.Black, width / 2 + 10, -5);
-            graphics.DrawString("X", new Font("10_IC_1", 12), Brushes.Black, width - 15, height / 2 + 10); //width, height / 2
+            graphics.DrawString("X", new Font("10_IC_1", 12), Brushes.Black, width - 15, height / 2 + 10);            
+        }
 
+        private void button_createChart_Click(object sender, EventArgs e)
+        {
+            createChart();
+        }
 
-            // Координатная сетка и отметки на координатных осях
-            int lx = -width / 40 + 1;
-            for (int i = 20; i < width - 20; i += 20)
+        private void button_clear_Click(object sender, EventArgs e)
+        {
+            graphics.Clear(Color.White);
+            createChart();
+        }
+
+        private void button_createPoints_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+
+            // создание и заполнение массива точек
+            Point[] points = new Point[100];
+            for (int i = 0; i < points.Length; i++)
             {
-                if (lx != 0)
-                {
-                    graphics.DrawLine(new Pen(Color.Gray, 1), 0 + i + 10, 0, 0 + i + 10, height); // Горизонтальная линия сетки
-                    graphics.DrawString(lx.ToString(), new Font("10_IC_1", 8, FontStyle.Bold), Brushes.Black, 0 + i + 5, height / 2 + 5); // подписи меток
-                }
-                graphics.DrawLine(new Pen(Color.Black, 2), 0 + i + 10, height / 2 - 5, 0 + i + 10, height / 2 + 5); // метка на оси OX
-
-                ++lx;
+                // points[i] = new Point(random.Next(-150, 151), random.Next(-150, 151));
+                points[i] = new Point(random.Next(0, 301), random.Next(0, 301)); // 0 = -150, 301 = 150
             }
 
-            int ly = height / 40 - 1;
-            for (int i = 20; i < height; i += 20)
-            {
-                if (ly != 0)
-                {
-                    graphics.DrawLine(new Pen(Color.Gray, 1), 0, 0 + i, width, 0 + i); // Вертикальная линия сетки
-                    graphics.DrawString(ly.ToString(), new Font("10_IC_1", 8, FontStyle.Bold), Brushes.Black, width / 2 + 5, 0 + i - 5); // подписи меток
-                }
-                graphics.DrawLine(new Pen(Color.Black, 2), width / 2 - 5, 0 + i, width / 2 + 5, 0 + i); // метка на оси OY
+            // переменные количества точек
+            int countPointsFirstQuater = 0;
+            int countPointsSecondQuater = 0;
+            int countPointsThirdQuater = 0;
+            int countPointsFourthQuater = 0;
 
-                --ly;
+            for (int i = 0; i < points.Length; i++)
+            {
+                // получение х и у  каждой точки массива
+                int x = points[i].X;
+                int y = points[i].Y;
+
+                // отрисовка точек
+                graphics.FillRectangle(Brushes.Red, x, y, 4, 4);
+
+                /*if (y > 0 && x > 0) countPointsFirstQuater++;
+                if(y > 0 && x < 0) countPointsSecondQuater++;
+                if(y < 0 && x < 0) countPointsThirdQuater++;
+                if(y < 0 && x > 0) countPointsFourthQuater++;*/
+
+                // подсчёт количества точек в четвертях
+                if (x > 150 && y < 150) countPointsFirstQuater++;
+                if (x < 150 && y < 150) countPointsSecondQuater++;
+                if (x < 150 && y > 150) countPointsThirdQuater++;
+                if (x > 150 && y > 150) countPointsFourthQuater++;
             }
+
+            // вывод количества точек в четвертях
+            label1_count.Text = countPointsFirstQuater.ToString();
+            label2_count.Text = countPointsSecondQuater.ToString();
+            label3_count.Text = countPointsThirdQuater.ToString();
+            label4_count.Text = countPointsFourthQuater.ToString();
         }
     }
 }
