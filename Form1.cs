@@ -27,6 +27,11 @@ namespace quarterPoints
 
         Graphics graphics;
         int width, height;
+        // переменные количества точек
+        int countPointsFirstQuater = 0;
+        int countPointsSecondQuater = 0;
+        int countPointsThirdQuater = 0;
+        int countPointsFourthQuater = 0;
 
         void createChart()
         {
@@ -61,6 +66,16 @@ namespace quarterPoints
         {
             graphics.Clear(Color.White);
             createChart();
+            
+            label1_count.Text = 0.ToString();
+            label2_count.Text = 0.ToString();
+            label3_count.Text = 0.ToString();
+            label4_count.Text = 0.ToString();
+            
+            countPointsFirstQuater = 0;
+            countPointsSecondQuater = 0;
+            countPointsThirdQuater = 0;
+            countPointsFourthQuater = 0;
         }
 
         private void button_createPoints_Click(object sender, EventArgs e)
@@ -73,13 +88,7 @@ namespace quarterPoints
             {
                 // points[i] = new Point(random.Next(-150, 151), random.Next(-150, 151));
                 points[i] = new Point(random.Next(0, 301), random.Next(0, 301)); // 0 = -150, 301 = 150
-            }
-
-            // переменные количества точек
-            int countPointsFirstQuater = 0;
-            int countPointsSecondQuater = 0;
-            int countPointsThirdQuater = 0;
-            int countPointsFourthQuater = 0;
+            }            
 
             for (int i = 0; i < points.Length; i++)
             {
