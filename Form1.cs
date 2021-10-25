@@ -65,13 +65,13 @@ namespace quarterPoints
         private void button_clear_Click(object sender, EventArgs e)
         {
             graphics.Clear(Color.White);
-            createChart();
-            
-            label1_count.Text = 0.ToString();
-            label2_count.Text = 0.ToString();
-            label3_count.Text = 0.ToString();
-            label4_count.Text = 0.ToString();
-            
+            createChart();                        
+
+            dataGridView1.Rows[1].Cells[0].Value = 0;
+            dataGridView1.Rows[1].Cells[1].Value = 0;
+            dataGridView1.Rows[1].Cells[2].Value = 0;
+            dataGridView1.Rows[1].Cells[3].Value = 0;
+
             countPointsFirstQuater = 0;
             countPointsSecondQuater = 0;
             countPointsThirdQuater = 0;
@@ -86,7 +86,6 @@ namespace quarterPoints
             Point[] points = new Point[100];
             for (int i = 0; i < points.Length; i++)
             {
-                // points[i] = new Point(random.Next(-150, 151), random.Next(-150, 151));
                 points[i] = new Point(random.Next(0, 301), random.Next(0, 301)); // 0 = -150, 301 = 150
             }            
 
@@ -97,25 +96,37 @@ namespace quarterPoints
                 int y = points[i].Y;
 
                 // отрисовка точек
-                graphics.FillRectangle(Brushes.Red, x, y, 4, 4);
-
-                /*if (y > 0 && x > 0) countPointsFirstQuater++;
-                if(y > 0 && x < 0) countPointsSecondQuater++;
-                if(y < 0 && x < 0) countPointsThirdQuater++;
-                if(y < 0 && x > 0) countPointsFourthQuater++;*/
+                graphics.FillRectangle(Brushes.Red, x, y, 4, 4);                
 
                 // подсчёт количества точек в четвертях
                 if (x > 150 && y < 150) countPointsFirstQuater++;
                 if (x < 150 && y < 150) countPointsSecondQuater++;
                 if (x < 150 && y > 150) countPointsThirdQuater++;
                 if (x > 150 && y > 150) countPointsFourthQuater++;
+            }            
+
+            dataGridView1.RowCount = 2;
+            dataGridView1.ColumnCount = 4;
+
+            dataGridView1.Rows[0].HeaderCell.Value = "Четверть";
+            dataGridView1.Rows[1].HeaderCell.Value = "Количество точек";
+
+            dataGridView1.RowHeadersWidth = 130;
+
+            dataGridView1.Columns[0].Width = 35;
+            dataGridView1.Columns[1].Width = 35;
+            dataGridView1.Columns[2].Width = 35;
+            dataGridView1.Columns[3].Width = 35;
+
+            for(int i = 0; i < 4; i++)
+            {
+                dataGridView1.Rows[0].Cells[i].Value = i + 1;
             }
 
-            // вывод количества точек в четвертях
-            label1_count.Text = countPointsFirstQuater.ToString();
-            label2_count.Text = countPointsSecondQuater.ToString();
-            label3_count.Text = countPointsThirdQuater.ToString();
-            label4_count.Text = countPointsFourthQuater.ToString();
+            dataGridView1.Rows[1].Cells[0].Value = countPointsFirstQuater;
+            dataGridView1.Rows[1].Cells[1].Value = countPointsSecondQuater;
+            dataGridView1.Rows[1].Cells[2].Value = countPointsThirdQuater;
+            dataGridView1.Rows[1].Cells[3].Value = countPointsFourthQuater;
         }
     }
 }
